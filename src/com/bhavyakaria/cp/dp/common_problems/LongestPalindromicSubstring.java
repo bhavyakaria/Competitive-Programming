@@ -1,5 +1,9 @@
 package com.bhavyakaria.cp.dp.common_problems;
 
+/**
+ * @author Bhavya Karia
+ * created on 10/05/2020
+ */
 public class LongestPalindromicSubstring {
 
     public static void main(String[] args) {

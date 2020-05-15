@@ -2,6 +2,10 @@ package com.bhavyakaria.cp.sorting_algos;
 
 import java.util.Arrays;
 
+/**
+ * @author Bhavya Karia
+ * created on 01/05/2020
+ */
 public class MergeSort {
     public static void main(String[] args) {
         int[] arr = new int[]{10, 50, 30, 50, 90, 20, 40};

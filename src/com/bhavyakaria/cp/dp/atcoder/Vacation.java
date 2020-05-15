@@ -2,6 +2,10 @@ package com.bhavyakaria.cp.dp.atcoder;
 
 import java.util.Scanner;
 
+/**
+ * @author Bhavya Karia
+ * created on 01/05/2020
+ */
 public class Vacation {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

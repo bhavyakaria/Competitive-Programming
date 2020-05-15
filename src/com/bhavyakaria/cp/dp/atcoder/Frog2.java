@@ -3,6 +3,10 @@ package com.bhavyakaria.cp.dp.atcoder;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * @author Bhavya Karia
+ * created on 01/05/2020
+ */
 public class Frog2 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

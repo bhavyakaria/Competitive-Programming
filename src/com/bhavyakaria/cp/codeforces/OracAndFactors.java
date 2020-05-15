@@ -6,6 +6,10 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.util.InputMismatchException;
 
+/**
+ * @author Bhavya Karia
+ * created on 12/05/2020
+ */
 public class OracAndFactors {
 
     public static void main(String[] args) {

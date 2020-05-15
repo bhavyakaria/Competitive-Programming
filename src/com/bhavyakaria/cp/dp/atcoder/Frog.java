@@ -3,9 +3,12 @@ package com.bhavyakaria.cp.dp.atcoder;
 * Find minimum cost incurred to reach N
 * */
 
-import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * @author Bhavya Karia
+ * created on 01/05/2020
+ */
 public class Frog {
     public static void main(String[] args) {
 

@@ -3,9 +3,10 @@ package com.bhavyakaria.cp.backtracking;
 import java.util.Arrays;
 
 /**
+ * @author Bhavya Karia
+ * created on 15/05/2020
  * Reference: https://www.youtube.com/watch?v=eUnNw2lR01M&t=548s
  */
-
 public class Permutation {
     public static void main(String[] args) {
         char[] arr = new char[]{'A', 'B', 'C'};

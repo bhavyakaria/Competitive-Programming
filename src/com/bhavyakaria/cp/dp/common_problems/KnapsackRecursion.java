@@ -2,6 +2,10 @@ package com.bhavyakaria.cp.dp.common_problems;
 
 import java.util.Arrays;
 
+/**
+ * @author Bhavya Karia
+ * created on 10/05/2020
+ */
 public class KnapsackRecursion {
 
     static int[][] dp;
