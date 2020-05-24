@@ -15,46 +15,27 @@ public class DroneDelivery {
             int R = s.nextInt();
 
             List<Integer> houses = new ArrayList<>();
+            houses.add(R);
             for (int i = 0; i < n; i++) {
                 houses.add(s.nextInt());
             }
+            Collections.sort(houses);
 
-            int ans = Integer.MAX_VALUE;
-            int[] jumps = new int[n];
-            for (int i = 0; i < houses.size()-1; i++) {
-                ans = Math.min(ans, (houses.get(i+1) - houses.get(i)));
-                jumps[i] = houses.get(i+1) - houses.get(i);
+            int diff = houses.get(1) - houses.get(0);
+            for (int i = 2; i <= n; i++) {
+                int val = houses.get(i) - houses.get(i-1);
+                diff = gcd(diff, val);
             }
-
-            int fin = ans;
-
-            int low = houses.get(0);
-            int high = houses.get(houses.size()-1);
-            int jump = ans;
-
-            boolean[] visited = new boolean[n];
-            while (R+jump <= high) {
-                int x = R+jump;
-                int y = R-jump;
-                if (houses.contains(x) || houses.contains(y)) {
-                    visited[houses.indexOf(x)] = true;
-                }
-                jump = ans * 2;
-            }
-
-            for (int i = 0; i < visited.length; i++) {
-                if (!visited[i]) {
-                    fin = 1;
-                    break;
-                }
-            }
-
-            System.out.println(fin);
+            System.out.println(diff);
 
         } catch (Exception e) {
 
         }
     }
-}
 
-// 3 5 10
+    public static int gcd(int a, int b) {
+        if (b == 0) return a;
+
+        return gcd(b, a % b);
+    }
+}
