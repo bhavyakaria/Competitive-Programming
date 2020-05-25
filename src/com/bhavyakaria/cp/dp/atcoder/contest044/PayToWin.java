@@ -1,5 +1,7 @@
 package com.bhavyakaria.cp.dp.atcoder.contest044;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -7,19 +9,22 @@ import java.util.Scanner;
  * created on 25/05/20
  */
 public class PayToWin {
+    static int A, B, C, D;
+    static Map<Long, Long> memo = new HashMap<>();
     public static void main(String[] args) {
         try {
             Scanner s = new Scanner(System.in);
             int t = s.nextInt();
 
             while (t-- > 0) {
-                int[] weight = new int[]{2, 3, 5, 1};
-                int[] val = new int[4];
-                int N = s.nextInt();
-                for (int i = 0; i < 4; i++) {
-                    val[i] = s.nextInt();
-                }
 
+                long N = s.nextLong();
+                A = s.nextInt();
+                B = s.nextInt();
+                C = s.nextInt();
+                D = s.nextInt();
+
+                System.out.println(minCoinsReq(N));
 
             }
 
@@ -28,26 +33,37 @@ public class PayToWin {
         }
     }
 
-    public int minCoinsReq(int[] weight, int[] val, int N, int x, int y) {
+    public static long minCoinsReq(long N) {
 
-        if (x == 0 || N == 0 || y >= N) {
-            return 0;
+        if (N == 0) return 0;
+
+        if (N == 1) return D;
+
+        if (memo.get(N) != null) {
+            return memo.get(N);
         }
 
-        int num;
-        if (x == weight.length) {
-            num = N - 1;
-        } else {
-            num = N - N*weight[x-1];
-        }
+        long l2 = (N/2)*2;
+        long r2 = (N+1)/2*2;
 
-        if (num == 0) {
-            return val[x-1];
-        } else if (num < 0) {
-            return minCoinsReq(weight, val, N, x - 1, y);
-        } else {
-            return Math.min(val[x-1] + minCoinsReq(weight, val, num, x - 1, y + num), minCoinsReq(weight, val, num, x - 1, y + num));
-        }
+        long l3 = (N/3)*3;
+        long r3 = (N+2)/3*3;
+
+        long l5 = (N/5)*5;
+        long r5 = (N+4)/5*5;
+
+        long min = 1_000_000_000_000_000_000L;
+        if (N < min) min = N*D;
+
+        min = Math.min(min, Math.abs(l2-N)*D+A+minCoinsReq(l2/2));
+        min = Math.min(min, Math.abs(r2-N)*D+A+minCoinsReq(r2/2));
+        min = Math.min(min, Math.abs(l3-N)*D+B+minCoinsReq(l3/3));
+        min = Math.min(min, Math.abs(r3-N)*D+B+minCoinsReq(r3/3));
+        min = Math.min(min, Math.abs(l5-N)*D+C+minCoinsReq(l5/5));
+        min = Math.min(min, Math.abs(r5-N)*D+C+minCoinsReq(r5/5));
+
+        memo.put(N, min);
+        return min;
 
     }
 }
