@@ -13,7 +13,7 @@ public class MaximumXOR {
     static int one, two;
     public static void main(String[] args) {
         try {
-            int[] a = new int[]{8, 10, 2};
+            int[] a = new int[]{0};
             String[] s = new String[3];
             for (int i = 0; i < a.length; i++) {
                 s[i] = decToBinary(a[i]);
@@ -60,34 +60,45 @@ public class MaximumXOR {
 
     public static void findXOR(List<String> A, List<String> B, int index, int maxLen) {
         if (index == maxLen) {
-//            one = Integer.parseInt(A.get(0), 2);
-//            two = Integer.parseInt(B.get(0), 2);
+            one = Integer.parseInt(A.get(0), 2);
+            two = Integer.parseInt(B.get(0), 2);
 
             System.out.println(Arrays.toString(A.toArray()));
             System.out.println(Arrays.toString(B.toArray()));
 
             return;
         }
-        List<String> tempA = new ArrayList<>();
-        List<String> tempB = new ArrayList<>();
+        List<String> tempA0 = new ArrayList<>();
+        List<String> tempA1 = new ArrayList<>();
+        List<String> tempB0 = new ArrayList<>();
+        List<String> tempB1 = new ArrayList<>();
 
         for (String s : A) {
             if (s.charAt(index) == '1') {
-                tempA.add(s);
+                tempA1.add(s);
+            } else {
+                tempA0.add(s);
             }
-        }
-
-        char check;
-        if (tempA.size() == 0) {
-            check = '1';
-        } else {
-            check = '0';
         }
 
         for (String s : B) {
-            if (s.charAt(index) == check) {
-                tempB.add(s);
+            if (s.charAt(index) == '1') {
+                tempB1.add(s);
+            } else {
+                tempB0.add(s);
             }
+        }
+
+        List<String> tempA = new ArrayList<>();
+        List<String> tempB = new ArrayList<>();
+        if (tempA0.size() != 0 && tempB1.size() != 0) {
+            tempA.addAll(tempA0);
+            tempB.addAll(tempB1);
+        }
+
+        if (tempA1.size() != 0 && tempB0.size() != 0) {
+            tempA.addAll(tempA1);
+            tempB.addAll(tempB0);
         }
 
         if (tempA.size() == 0) {
