@@ -39,17 +39,18 @@ public class PayToWin {
 
         if (N == 1) return D;
 
-        if (memo.get(N) != null) {
-            return memo.get(N);
+        Long cached = memo.get(N);
+        if (cached != null) {
+            return cached;
         }
 
-        long l2 = (N/2)*2;
+        long l2 = N/2*2;
         long r2 = (N+1)/2*2;
 
-        long l3 = (N/3)*3;
+        long l3 = N/3*3;
         long r3 = (N+2)/3*3;
 
-        long l5 = (N/5)*5;
+        long l5 = N/5*5;
         long r5 = (N+4)/5*5;
 
         long min = 1_000_000_000_000_000_000L;

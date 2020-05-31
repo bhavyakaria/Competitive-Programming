@@ -10,11 +10,10 @@ import java.util.List;
  */
 public class MaximumXOR {
 
-    static int one, two;
     public static void main(String[] args) {
         try {
-            int[] a = new int[]{0};
-            String[] s = new String[3];
+            int[] a = new int[]{14,15,9,3,2};
+            String[] s = new String[5];
             for (int i = 0; i < a.length; i++) {
                 s[i] = decToBinary(a[i]);
             }
@@ -50,24 +49,24 @@ public class MaximumXOR {
                 size = A.size();
             }
 
-            findXOR(A, B, i-1, max);
-            System.out.println(one ^ two);
+            System.out.println(findXOR(A, B, i));
 
         } catch (Exception e) {
 
         }
     }
 
-    public static void findXOR(List<String> A, List<String> B, int index, int maxLen) {
-        if (index == maxLen) {
-            one = Integer.parseInt(A.get(0), 2);
-            two = Integer.parseInt(B.get(0), 2);
+    public static int findXOR(List<String> A, List<String> B, int index) {
 
-            System.out.println(Arrays.toString(A.toArray()));
-            System.out.println(Arrays.toString(B.toArray()));
+        if (A.size() == 0 || B.size() == 0) return 0;
 
-            return;
+        if (A.size() == 1 && B.size() == 1) {
+            int one = Integer.parseInt(A.get(0), 2);
+            int two = Integer.parseInt(B.get(0), 2);
+
+            return one ^ two;
         }
+
         List<String> tempA0 = new ArrayList<>();
         List<String> tempA1 = new ArrayList<>();
         List<String> tempB0 = new ArrayList<>();
@@ -89,30 +88,22 @@ public class MaximumXOR {
             }
         }
 
-        List<String> tempA = new ArrayList<>();
-        List<String> tempB = new ArrayList<>();
-        if (tempA0.size() != 0 && tempB1.size() != 0) {
-            tempA.addAll(tempA0);
-            tempB.addAll(tempB1);
+        if (A.size() == 1) {
+            tempA0 = A;
+            tempA1 = A;
         }
 
-        if (tempA1.size() != 0 && tempB0.size() != 0) {
-            tempA.addAll(tempA1);
-            tempB.addAll(tempB0);
+        if (B.size() == 1) {
+            tempB0 = B;
+            tempB1 = B;
         }
 
-        if (tempA.size() == 0) {
-            tempA = A;
-        }
+        System.out.println("A0 -> " + Arrays.toString(tempA0.toArray()) +": index -> "+index);
+        System.out.println("A1 -> " + Arrays.toString(tempA1.toArray()) +": index -> "+index);
+        System.out.println("B0 -> " + Arrays.toString(tempB0.toArray()));
+        System.out.println("B1 -> " + Arrays.toString(tempB1.toArray()));
 
-        if (tempB.size() == 0) {
-            tempB = B;
-        }
-
-        A = tempA;
-        B = tempB;
-
-        findXOR(A, B, index+1, maxLen);
+        return Math.max(findXOR(tempA0, tempB1, index+1), findXOR(tempA1, tempB0, index+1));
     }
 
     public static void appendZeros(String[] s, int i, int maxLength) {
