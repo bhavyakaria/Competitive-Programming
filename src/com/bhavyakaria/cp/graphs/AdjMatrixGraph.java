@@ -1,6 +1,7 @@
 package com.bhavyakaria.cp.graphs;
 
 import java.util.Scanner;
+import java.util.Stack;
 
 /**
  * @author Bhavya Karia
@@ -30,6 +31,31 @@ public class AdjMatrixGraph {
         }
     }
 
+    void dfs(int source) {
+        boolean[] visited = new boolean[vertices];
+        visited[source] = true;
+
+        Stack<Integer> stack = new Stack<>();
+        stack.push(source);
+
+        int x;
+        System.out.println("The depth first order is:");
+        System.out.println(source);
+
+        while (!stack.isEmpty()) {
+            x = stack.pop();
+            for (int j = 0; j < vertices; j++) {
+                if (matrix[x][j] == 1 && !visited[j]) {
+                    stack.push(x);
+                    visited[j] = true;
+                    System.out.println(x);
+                    x = j;
+                    j = -1;
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -52,5 +78,6 @@ public class AdjMatrixGraph {
         }
 
         adjMatrixGraph.printGraph();
+        adjMatrixGraph.dfs(0);
     }
 }
